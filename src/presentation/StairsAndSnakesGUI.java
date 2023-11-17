@@ -12,21 +12,14 @@ import javax.swing.border.LineBorder;
 
 
 public class StairsAndSnakesGUI extends JFrame{
-JButton nuevo,abrir,salir,instruciones;
+JButton nuevo,abrir,salir;
 	
-	/**
-	*Constructor de la interfaz gráfica de StairsAndSnakes.
-	*/
 	private StairsAndSnakesGUI() {
 		super("Inicio StairsAndSnakes");
 		prepararElementos();
 		prepararAcciones();
 	}
 	
-	
-	/**
-     * Prepara los elementos de la interfaz gráfica de StairsAndSnakes.
-     */
     private void prepararElementos() {   
     	setSize(1045, 665);
         setLayout(new BorderLayout());
@@ -51,21 +44,13 @@ JButton nuevo,abrir,salir,instruciones;
         salir.setBackground(Color.white);
         salir.setBorder(borde);
         salir.setFont(fuente);
-        instruciones= new JButton("Instruciones");
-        instruciones.setBounds(390, 480, 260, 45);
-        instruciones.setBackground(Color.white);
-        instruciones.setBorder(borde);
-        instruciones.setFont(fuente);
         ImagenesStairsAndSnakes.add(nuevo);
         ImagenesStairsAndSnakes.add(abrir);
         ImagenesStairsAndSnakes.add(salir);
-        ImagenesStairsAndSnakes.add(instruciones);
         add(ImagenesStairsAndSnakes);
     } 
     
-    /**
-     * Prepara las acciones de la interfaz gráfica de StairsAndSnakes.
-     */
+
     private void prepararAcciones(){   
     	setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter(){
@@ -77,13 +62,9 @@ JButton nuevo,abrir,salir,instruciones;
         nuevo.addActionListener(e -> accionNuevo());
         salir.addActionListener(e -> accionSalir());
         abrir.addActionListener(e -> accionAbrir());
-        instruciones.addActionListener(e -> accionnInstruciones());
-        
         
     } 
-    /**
-     * Realiza la acción de salir del juego.
-     */
+    
     private void accionSalir() {   
         int respuesta = JOptionPane.showConfirmDialog(null, "¿Seguro que quieres salir del juego?", "Salir del juego", JOptionPane.OK_CANCEL_OPTION);
         if (respuesta == JOptionPane.OK_OPTION){
@@ -92,18 +73,12 @@ JButton nuevo,abrir,salir,instruciones;
         }
     } 
     
-    /**
-     * Realiza la acción de iniciar un nuevo juego.
-     */
     private void accionNuevo() {
         dispose();
         Opciones op = new Opciones();
         op.setVisible(true);
     }
     
-    /**
-     * Realiza la acción de abrir un juego guardado.
-     */
     private void accionAbrir() {   
         JFileChooser chooser = new JFileChooser();
         int open = chooser.showOpenDialog(null);
@@ -113,16 +88,7 @@ JButton nuevo,abrir,salir,instruciones;
         }
     }
     
-    private void accionnInstruciones() {
-    	dispose();
-    	Instruciones ins = new Instruciones();
-    	ins.setVisible(true);
-    }
-    
-    /**
-     * Punto de entrada principal para el programa StairsAndSnakes.
-     * @param args 
-     */
+
 	public static void main(String[] args) {
 		StairsAndSnakesGUI gui = new StairsAndSnakesGUI();
 	    gui.setVisible(true);

@@ -2,18 +2,13 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.io.Serializable;
 
-public class Dado implements Serializable{
+public class Dado{
 
 	private final ArrayList<Valor> values;
 	private final int probabilidad;
 	private int state;
 
-	/**
-	 * Crea un objeto Dado con la probabilidad de movimiento.
-	 * @param porM la probabilidad de movimiento del dado
-	 */
 	public Dado(int porM) {
 		this.state = -1;
 		this.probabilidad = porM;
@@ -23,9 +18,6 @@ public class Dado implements Serializable{
 		}
 	}
 	
-	/**
-	 * Simula el lanzamiento del dado y actualiza el estado del dado y los modificadores de las caras según la probabilidad.
-	 */
 	public void lanzarDado() {
 		Random random = new Random();
 		int cara;
@@ -48,11 +40,6 @@ public class Dado implements Serializable{
 		}
 	}
 
-	/**
-	 * Asigna un modificador aleatorio a una cara del dado.
-	 * @param cara La cara del dado a la que se asignará el modificador.
-	 * @param random Objeto Random utilizado para generar números aleatorios.
-	 */
 	private void setRandomModifierToSomeFace(Valor cara,Random random) {
 		int mdf = random.nextInt(1,4);
 
@@ -62,11 +49,6 @@ public class Dado implements Serializable{
 			case 3 -> new ChangePosition(cara);
 		}
 	}
-	
-	/**
-	 * Retorna el objeto Valor correspondiente al estado actual del dado.
-	 * @return El objeto Valor correspondiente al estado actual del dado.
-	 */
 	public Valor getDado() {
 		if(state == -1) {
 			return new Valor(0);
@@ -75,10 +57,6 @@ public class Dado implements Serializable{
 		}
 	}
 
-	/**
-	 * Retorna la lista de objetos Valor del dado.
-	 * @return La lista de objetos Valor del dado.
-	 */
 	public ArrayList<Valor> getValues() {
 		return  values;
 	}

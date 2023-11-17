@@ -23,17 +23,12 @@ public class Opciones extends JDialog{
 	private Imagen imagen;
 	private JTextField uno, dos, selectescaleras, selectserpientes, selecttablero;
 
-	/**
-	 * Constructor de la clase Opciones.
-	 */
+
 	public Opciones() {
 		prepararElementos();
 		prepararAcciones();
 	}
-	
-	/**
-	 * Prepara los elementos de la interfaz gráfica de la clase Opciones.
-	 */
+
 	public void prepararElementos() {
 		setSize(1045,665);
 		setTitle("Opciones Stairs and Snakes");
@@ -65,14 +60,6 @@ public class Opciones extends JDialog{
         add(imagen);
 	}
 
-	/**
-	 * Prepara los elementos relacionados con los jugadores de la interfaz gráfica de la clase Opciones.
-	 * Prepara los elementos relacionados con el jugador 1 de la interfaz gráfica de la clase Opciones.
-	 * Prepara los elementos relacionados con el jugador 2 de la interfaz gráfica de la clase Opciones.
-	 * Prepara los elementos de la interfaz gráfica de StairsAndSnakes.
-	 * Prepara las acciones de la interfaz gráfica de StairsAndSnakes.
-	 * Actualiza las etiquetas (JLabels) del tablero.
-	 */
 	private void prepararElementosPlayers() {
 		players = new Players(COLOR[0],COLOR[1]);
 		TitledBorder titulo = new TitledBorder(borde,"Players");
@@ -88,13 +75,13 @@ public class Opciones extends JDialog{
 		dificultad.setBounds(430, 60, 300, 30);
 		dificultad.setFont(fuente);
 		String[] rivales = {"Player","Machine"},tiporivales = {"Principiante","Aprendiz"};
-		selectRival = new JComboBox<>(rivales);
+		selectRival = new JComboBox<String>(rivales);
 		selectRival.setSelectedItem(rivales[0]);
 		selectRival.setBounds(185, 55, 180, 40);
 		selectRival.setFont(fuente);
 		selectRival.setBackground(Color.white);
 		selectRival.setBorder(borde);
-		selectdificultad = new JComboBox<>(tiporivales);
+		selectdificultad = new JComboBox<String>(tiporivales);
 		selectdificultad.setSelectedItem(tiporivales[0]);
 		selectdificultad.setBounds(550, 55, 180, 40);
 		selectdificultad.setFont(fuente);
@@ -112,9 +99,6 @@ public class Opciones extends JDialog{
 
 	}
 
-	/**
-	 * 
-	 */
 	private void prepararElementosPlayer1() {
 		JLabel player = new JLabel("Player 1");
 		player.setBounds(230, 100, 200, 35);
@@ -141,10 +125,6 @@ public class Opciones extends JDialog{
 		players.add(selectcolor1);
 	}
 
-	/**
-	 * Prepara los elementos relacionados con el jugador 1 de la interfaz gráfica de la clase Opciones.
-	 * Actualiza las etiquetas (JLabels) del tablero.
-	 */
 	private void prepararElementosPlayer2() {
 		JLabel player = new JLabel("Player 2");
 		player.setBounds(640, 100, 200, 35);
@@ -171,10 +151,6 @@ public class Opciones extends JDialog{
 		players.add(selectcolor2);
 	}
 
-	/**
-	 * Prepara los elementos relacionados con las opciones del juego en la interfaz gráfica de la clase Opciones.
-	 * Actualiza las etiquetas (JLabels) del tablero.
-	 */
 	private void prepararElementosJuego() {
     	JLabel juego = new JLabel();
     	TitledBorder titulo = new TitledBorder(borde,"Juego");
@@ -184,7 +160,7 @@ public class Opciones extends JDialog{
     	juego.setOpaque(false);
     	juego.setBounds(40, 290, 910, 250);
     	JLabel casillas = new JLabel("% Specials"), modificadores = new JLabel("% Modifiers"), escaleras = new JLabel("Number of Stairs"), serpientes = new JLabel ("Number of Snakes");
-    	JLabel transformar = new JLabel("Transform"), tablero = new JLabel("Boxes/Rows");
+    	JLabel transformar = new JLabel("Transform"), tablero = new JLabel("Board Size");
     	casillas.setBounds(20, 55, 400, 30);
     	casillas.setFont(fuente);
     	modificadores.setBounds(20, 120, 400, 30);
@@ -249,12 +225,6 @@ public class Opciones extends JDialog{
     	imagen.add(juego);
 	}
 
-	/**
-	 * Prepara las acciones y eventos relacionados con la interfaz gráfica de la clase Opciones.
-	 * Actualiza las acciones relacionadas con la selección del rival.
-	 * Realiza la acción de jugar.
-	 * Realiza la acción de salir.
-	 */
 	private void prepararAcciones(){
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter(){
@@ -268,9 +238,6 @@ public class Opciones extends JDialog{
         Cancelar.addActionListener(e -> accionSalir());
     }
 
-	/**
-	 * Realiza la acción relacionada con la selección del rival.
-	 */
 	private void accionRival() {
 		if (selectRival.getSelectedItem().equals("Machine")) {
 			dificultad.setVisible(true);
@@ -287,17 +254,10 @@ public class Opciones extends JDialog{
 		}
 	}
 
-	/**
-	 * Realiza la acción de salir de la interfaz gráfica actual.
-	 */
 	private void accionSalir(){
     	dispose();
     }
 
-	/**
-	 * Realiza la acción de comenzar el juego con las opciones seleccionadas.
-	 * Puede lanzar una excepción de tipo StairsAndSnakesException si ocurre un error al iniciar el juego.
-	 */
 	private void accionJugar() {
 		String nombre1 = uno.getText();
 		String nombre2 = dos.getText();
@@ -313,7 +273,7 @@ public class Opciones extends JDialog{
 		String dificultad = (String)selectdificultad.getSelectedItem();
 		try {
 			juego eys;
-			eys = new 	juego(nombre1, nombre2, coloruno, colordos, tipoRival, casilla, modificador, tablero, serpiente, escalera, transformar, dificultad);
+			eys = new juego(nombre1, nombre2, coloruno, colordos, tipoRival, casilla, modificador, tablero, serpiente, escalera, transformar, dificultad);
 			eys.setVisible(true);
 			dispose();
 		}catch (StairsAndSnakesException e) {
@@ -328,11 +288,6 @@ class Players extends JPanel{
 	String color1;
 	String color2;
 
-	/**
-	 * Crea una instancia de la clase Players con los colores especificados para los jugadores.
-	 * @param color1 Color del jugador 1.
-	 * @param color2 Color del jugador 2.
-	 */
 	public Players(String color1,String color2) {
 		this.color1 = color1;
 		this.color2 = color2;
